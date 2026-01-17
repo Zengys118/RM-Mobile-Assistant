@@ -1,0 +1,64 @@
+<resources>
+    <string name="app_name">RM Mobile Assistant</string>
+
+    <!-- 主界面 -->
+    <string name="home_title">RM手机助手</string>
+    <string name="home_armor_title">装甲板模拟</string>
+    <string name="home_armor_desc">全屏显示灯条与数字</string>
+    <string name="home_field_title">赛场测试（准备模式）</string>
+    <string name="home_field_desc">点左/右区域切换步骤</string>
+    <string name="home_editor_title">编辑测试步骤</string>
+    <string name="home_editor_desc">新增/修改/排序准备模式内容</string>
+
+    <!-- 编辑器 -->
+    <string name="editor_title">编辑步骤</string>
+    <string name="btn_add">添加</string>
+    <string name="btn_edit">修改</string>
+    <string name="btn_del">删除</string>
+    <string name="btn_up">上移</string>
+    <string name="btn_down">下移</string>
+    <string name="btn_save">保存</string>
+    <string name="toast_select_one">请先选中一条</string>
+    <string name="toast_saved">已保存</string>
+
+    <!-- FieldTest 提示（如果你要显示） -->
+    <string name="hint_prev">上一个</string>
+    <string name="hint_next">下一个</string>
+
+    <!-- 默认赛场测试步骤 -->
+    <string name="step_check_power_title">检查电源</string>
+    <string name="step_check_power_desc">电池 / 电源开关 / 指示灯</string>
+
+    <string name="step_check_link_title">检查通信</string>
+    <string name="step_check_link_desc">WiFi / 4G / 热点已连接</string>
+
+    <string name="step_move_forward_title">前进</string>
+    <string name="step_move_forward_desc">低速前进 1–2 米</string>
+
+    <string name="step_move_backward_title">后退</string>
+    <string name="step_move_backward_desc">低速后退 1–2 米</string>
+
+    <string name="step_strafe_left_title">左移</string>
+    <string name="step_strafe_left_desc">横向向左移动</string>
+
+    <string name="step_strafe_right_title">右移</string>
+    <string name="step_strafe_right_desc">横向向右移动</string>
+
+    <string name="step_rotate_left_title">左旋转</string>
+    <string name="step_rotate_left_desc">逆时针旋转约 90°</string>
+
+    <string name="step_rotate_right_title">右旋转</string>
+    <string name="step_rotate_right_desc">顺时针旋转约 90°</string>
+
+    <string name="step_gimbal_test_title">云台测试</string>
+    <string name="step_gimbal_test_desc">Yaw / Pitch 扫描</string>
+
+    <string name="step_done_title">完成</string>
+    <string name="step_done_desc">准备开始比赛</string>
+
+
+
+    <string name="dialog_default_step">步骤</string>
+
+
+</resources>
