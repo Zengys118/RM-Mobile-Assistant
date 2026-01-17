@@ -48,3 +48,24 @@
 
 APK 位于：[APK](app/build/outputs/apk/debug)
 
+## 📂 项目结构
+RMMobileAssistant/
+├─ app/ # Android 应用主模块
+│ ├─ src/main/
+│ │ ├─ java/com/example/rmmobileassistant/
+│ │ │ ├─ MainActivity.kt # 主界面：功能入口（装甲板 / 赛场测试 / 编辑）
+│ │ │ ├─ ArmorActivity.kt # 装甲板模拟：全屏灯条与数字显示
+│ │ │ ├─ FieldTestActivity.kt# 赛场测试：步骤轮播 / 点击切换
+│ │ │ ├─ StepEditorActivity.kt # 步骤编辑器：增删改排序测试流程
+│ │ │ ├─ Step.kt # 步骤数据模型（title / desc）
+│ │ │ └─ StepsRepo.kt # 步骤持久化（SharedPreferences）
+│ │ ├─ res/
+│ │ │ ├─ layout/ # XML 界面布局
+│ │ │ ├─ values/ # 字符串 / 主题 / 颜色
+│ │ │ └─ mipmap/ # App 图标资源
+│ │ └─ AndroidManifest.xml # 应用配置与入口声明
+│ └─ build.gradle # 模块构建配置
+├─ assets/ # README 使用的截图资源
+│ └─ screenshot_home.png
+├─ README.md # 项目说明文档
+└─ build.gradle # 项目级 Gradle 配置
