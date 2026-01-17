@@ -46,7 +46,7 @@
 
 ## 📦 APK
 
-APK 位于：[APK](app/build/outputs/apk/debug)
+APK 位于：[APK](APK)
 
 ---
 
