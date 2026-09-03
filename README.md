@@ -26,7 +26,10 @@
 
 ## 🎬 效果演示
 
-[播放屏幕录制视频](assets/demo.mp4)
+<video controls preload="metadata" width="720">
+  <source src="https://raw.githubusercontent.com/Zengys118/RM_Mobile_Assistant/master/assets/demo.mp4" type="video/mp4">
+  [播放屏幕录制视频](assets/demo.mp4)
+</video>
 
 ---
 
