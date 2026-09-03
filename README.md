@@ -1,6 +1,6 @@
 # RM Mobile Assistant
 
-一款为 RoboMaster 比赛设计的 Android 辅助工具，用于赛前测试与显示辅助。
+一款为 RoboMaster 比赛设计的 Android 辅助工具，用于日常或赛前测试与显示辅助。
 
 ---
 
@@ -49,7 +49,9 @@
 
 ## 📦 APK
 
-APK 位于：[APK](APK)
+## 📦 下载
+
+请前往 [Releases](https://github.com/Zengys118/RM-Mobile-Assistant/releases) 下载最新版本 APK。
 
 ---
 
