@@ -24,6 +24,10 @@
 
 ![Home](assets/screenshot_home.jpg)
 
+## 🎬 效果演示
+
+[播放屏幕录制视频](assets/demo.mp4)
+
 ---
 
 ## 🔧 技术栈
@@ -69,7 +73,8 @@ RMMobileAssistant/
 │  │  └─ AndroidManifest.xml    # 应用配置与入口声明
 │  └─ build.gradle              # 模块构建配置
 ├─ assets/                      # README 使用的截图资源
-│  └─ screenshot_home.png
+│  ├─ screenshot_home.jpg
+│  └─ demo.mp4
 ├─ README.md                    # 项目说明文档
 └─ build.gradle                 # 项目级 Gradle 配置
 ```

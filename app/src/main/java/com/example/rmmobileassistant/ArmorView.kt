@@ -25,8 +25,9 @@ class ArmorView @JvmOverloads constructor(
         isSubpixelText = true
     }
 
-    private val leftPath = Path()
-    private val rightPath = Path()
+    private val leftLightPath = Path()
+    private val rightLightPath = Path()
+    private val digitPath = Path()
 
     override fun onDraw(canvas: Canvas) {
         super.onDraw(canvas)
@@ -38,8 +39,8 @@ class ArmorView @JvmOverloads constructor(
         val cy = h / 2f
 
         val baseColor = when (team) {
-            Team.RED -> Color.rgb(255, 60, 60)
-            Team.BLUE -> Color.rgb(60, 170, 255)
+            Team.RED -> Color.rgb(245, 0, 22)
+            Team.BLUE -> Color.rgb(0, 96, 230)
         }
 
         val dm = resources.displayMetrics
@@ -47,7 +48,7 @@ class ArmorView @JvmOverloads constructor(
         val pxPerMmY = dm.ydpi / 25.4f
 
         val distMm = 135f
-        val barHMm = 57f
+        val barHMm = 63f
 
         var distPx = distMm * pxPerMmX
         var barHPx = barHMm * pxPerMmY
@@ -61,50 +62,108 @@ class ArmorView @JvmOverloads constructor(
         barHPx *= scale
 
         val barW = barHPx * 0.15f
-        val roofH = (barHPx * 0.054f).coerceAtLeast(1f)
+        val lightHPx = barHPx * (51f / 63f)
+        val lightW = barW * (6.5f / 9f)
+        // The colored light strip has asymmetric end bevels: the outside
+        // bevel is long, while the bevel facing the center is short.
+        val lightLongBevel = (lightHPx * 0.13f).coerceAtLeast(1f)
+        val lightShortBevel = (lightHPx * 0.052f).coerceAtLeast(1f)
 
-        val top = cy - barHPx / 2f
-        val bot = cy + barHPx / 2f
+        val lightTop = cy - lightHPx / 2f
+        val lightBot = cy + lightHPx / 2f
 
         val leftCenterX = cx - distPx / 2f
         val rightCenterX = cx + distPx / 2f
 
-        val lx0 = leftCenterX - barW / 2f
-        val lx1 = leftCenterX + barW / 2f
-        val rx0 = rightCenterX - barW / 2f
-        val rx1 = rightCenterX + barW / 2f
-
-        buildHex(leftPath, lx0, lx1, top, bot, roofH)
-        buildHex(rightPath, rx0, rx1, top, bot, roofH)
+        buildBarPath(
+            leftLightPath,
+            leftCenterX,
+            lightTop,
+            lightBot,
+            lightW,
+            innerOnRight = true,
+            longBevel = lightLongBevel,
+            shortBevel = lightShortBevel
+        )
+        buildBarPath(
+            rightLightPath,
+            rightCenterX,
+            lightTop,
+            lightBot,
+            lightW,
+            innerOnRight = false,
+            longBevel = lightLongBevel,
+            shortBevel = lightShortBevel
+        )
 
         paint.style = Paint.Style.FILL
         paint.color = baseColor
-        paint.alpha = 255
-        paint.maskFilter = BlurMaskFilter(barW * 2.0f, BlurMaskFilter.Blur.NORMAL)
-        canvas.drawPath(leftPath, paint)
-        canvas.drawPath(rightPath, paint)
+        canvas.drawPath(leftLightPath, paint)
+        canvas.drawPath(rightLightPath, paint)
 
-        paint.maskFilter = null
-        paint.alpha = 255
-        canvas.drawPath(leftPath, paint)
-        canvas.drawPath(rightPath, paint)
-
-        textPaint.textSize = barHPx * 1.0f
-        val fm = textPaint.fontMetrics
-        val textY = cy - (fm.ascent + fm.descent) / 2f
-        canvas.drawText("3", cx, textY, textPaint)
+        buildThree(digitPath, cx, cy, barHPx * 0.92f)
+        canvas.drawPath(digitPath, textPaint)
     }
 
-    private fun buildHex(p: Path, x0: Float, x1: Float, top: Float, bot: Float, roofH: Float) {
-        val cx = (x0 + x1) / 2f
-        val rh = roofH.coerceAtLeast(1f)
+    private fun buildBarPath(
+        p: Path,
+        cx: Float,
+        top: Float,
+        bot: Float,
+        width: Float,
+        innerOnRight: Boolean,
+        longBevel: Float,
+        shortBevel: Float
+    ) {
+        val halfW = width / 2f
+        val long = longBevel.coerceAtLeast(1f)
+        val short = shortBevel.coerceAtLeast(1f)
+        val leftBevel = if (innerOnRight) short else long
+        val rightBevel = if (innerOnRight) long else short
+        // DXF bevels are approximately 45 degrees, so their horizontal
+        // projection is shorter than their vertical run.
+        val leftInset = leftBevel * 0.7f
+        val rightInset = rightBevel * 0.7f
+        val xLeft = cx - halfW
+        val xRight = cx + halfW
         p.reset()
-        p.moveTo(cx, top)
-        p.lineTo(x1, top + rh)
-        p.lineTo(x1, bot - rh)
-        p.lineTo(cx, bot)
-        p.lineTo(x0, bot - rh)
-        p.lineTo(x0, top + rh)
+        p.moveTo(xLeft, top + leftBevel)
+        p.lineTo(xLeft + leftInset, top)
+        p.lineTo(xRight - rightInset, top)
+        p.lineTo(xRight, top + rightBevel)
+        p.lineTo(xRight, bot - rightBevel)
+        p.lineTo(xRight - rightInset, bot)
+        p.lineTo(xLeft + leftInset, bot)
+        p.lineTo(xLeft, bot - leftBevel)
+        p.close()
+    }
+
+    // Straight-edged outline based on the official RM 3 decal.
+    private fun buildThree(p: Path, cx: Float, cy: Float, height: Float) {
+        val points = arrayOf(
+            189f to 37f, 156f to 43f, 131f to 53f, 131f to 103f,
+            168f to 87f, 216f to 87f, 231f to 94f, 240f to 104f,
+            245f to 122f, 244f to 136f, 237f to 151f, 221f to 163f,
+            197f to 169f, 155f to 170f, 155f to 218f, 200f to 218f,
+            236f to 229f, 254f to 250f, 256f to 276f, 252f to 288f,
+            241f to 301f, 227f to 309f, 206f to 314f, 181f to 314f,
+            158f to 310f, 120f to 292f, 120f to 347f, 163f to 360f,
+            214f to 362f, 260f to 352f, 293f to 332f, 304f to 320f,
+            315f to 299f, 320f to 277f, 320f to 257f, 310f to 229f,
+            293f to 210f, 269f to 197f, 247f to 192f, 281f to 174f,
+            301f to 150f, 307f to 132f, 308f to 102f, 300f to 78f,
+            286f to 61f, 259f to 45f, 225f to 37f
+        )
+        val scaleY = height / 325f
+        val scaleX = scaleY
+        fun x(value: Float) = cx + (value - 220f) * scaleX
+        fun y(value: Float) = cy + (value - 199.5f) * scaleY
+
+        p.reset()
+        p.moveTo(x(points[0].first), y(points[0].second))
+        for (i in 1 until points.size) {
+            p.lineTo(x(points[i].first), y(points[i].second))
+        }
         p.close()
     }
 }
