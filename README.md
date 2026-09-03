@@ -26,10 +26,7 @@
 
 ## 🎬 效果演示
 
-<video controls preload="metadata" width="720">
-  <source src="https://raw.githubusercontent.com/Zengys118/RM_Mobile_Assistant/master/assets/demo.mp4" type="video/mp4">
-  [播放屏幕录制视频](assets/demo.mp4)
-</video>
+![效果演示](assets/demo.gif)
 
 ---
 
@@ -75,9 +72,9 @@ RMMobileAssistant/
 │  │  │  └─ mipmap/             # App 图标资源
 │  │  └─ AndroidManifest.xml    # 应用配置与入口声明
 │  └─ build.gradle              # 模块构建配置
-├─ assets/                      # README 使用的截图资源
+├─ assets/                      # README 使用的图片和演示动画
 │  ├─ screenshot_home.jpg
-│  └─ demo.mp4
+│  └─ demo.gif
 ├─ README.md                    # 项目说明文档
 └─ build.gradle                 # 项目级 Gradle 配置
 ```
