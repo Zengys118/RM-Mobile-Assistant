@@ -25,7 +25,7 @@
 ![Home](assets/screenshot_home.jpg)
 
 ## 🎬 效果演示
-![vision]((assets/img.jpg)
+![vision](assets/img.png)
 ![效果演示](assets/demo.gif)
 
 ---
